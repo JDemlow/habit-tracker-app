@@ -14,7 +14,7 @@ const TotalTimeTracked: React.FC = () => {
 
   return (
     <div className="mb-6">
-      <h2 className="text-xl font-semibold mb-2">Total Time Tracked Today</h2>
+      <h2 className="mb-2 text-xl font-semibold">Total Time Tracked Today</h2>
       <p className="text-3xl text-green-600">{totalToday} minutes</p>
       {/* You can add more stats for week, month, year */}
     </div>

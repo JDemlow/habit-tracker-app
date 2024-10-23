@@ -89,8 +89,8 @@ const HabitChart: React.FC<HabitChartProps> = ({ habitId }) => {
   };
 
   return (
-    <div className="mt-6 bg-white p-4 rounded shadow-md h-64 sm:h-80">
-      <h2 className="text-xl font-semibold mb-4">
+    <div className="h-64 p-4 mt-6 bg-white rounded shadow-md sm:h-80">
+      <h2 className="mb-4 text-xl font-semibold">
         Progress Over the Last 7 Days
       </h2>
       <Line data={data} options={options} />

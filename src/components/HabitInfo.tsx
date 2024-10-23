@@ -21,13 +21,13 @@ const HabitInfo: React.FC<HabitInfoProps> = ({ habitId }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow-md mb-6">
-      <h2 className="text-2xl font-semibold mb-2">{habit.name}</h2>
+    <div className="p-4 mb-6 bg-white rounded shadow-md">
+      <h2 className="mb-2 text-2xl font-semibold">{habit.name}</h2>
       <p className="mb-2">Daily Goal: {habit.goalMinutes} minutes</p>
       <p className="mb-4">Today: {habit.todayMinutes} minutes</p>
       <button
         onClick={handleIncrement}
-        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
       >
         +5 Minutes
       </button>

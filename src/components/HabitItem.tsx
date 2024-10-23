@@ -12,23 +12,36 @@ interface HabitItemProps {
 }
 
 const HabitItem: React.FC<HabitItemProps> = ({ habit }) => {
-  const { incrementHabitTime } = useHabits();
+  const { incrementHabitTime, deleteHabit } = useHabits();
 
   const handleIncrement = () => {
     incrementHabitTime(habit.id, 5); // Increment by 5 minutes
   };
 
+  const handleDelete = () => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the habit "${habit.name}"?`
+      )
+    ) {
+      deleteHabit(habit.id);
+    }
+  };
+
   return (
-    <div className="bg-white shadow-md rounded p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+    <div className="flex flex-col p-4 bg-white rounded shadow-md sm:flex-row sm:justify-between sm:items-center">
       <div>
         <Link to={`/habit/${habit.id}`}>
-          <h2 className="text-xl font-semibold mb-2">{habit.name}</h2>
+          <h2 className="mb-2 text-xl font-semibold">{habit.name}</h2>
         </Link>
         <p className="mb-2">Goal: {habit.goalMinutes} minutes/day</p>
         <ProgressBar current={habit.todayMinutes} goal={habit.goalMinutes} />
       </div>
-      <div className="mt-4 sm:mt-0">
+      <div className="flex mt-4 space-x-2 sm:mt-0">
         <Button onClick={handleIncrement}>+5 Minutes</Button>
+        <Button onClick={handleDelete} className="bg-red-500 hover:bg-red-600">
+          Delete
+        </Button>
       </div>
     </div>
   );

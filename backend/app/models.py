@@ -14,7 +14,9 @@ class Habit(Base):
 
     # Relationships
     progress = relationship(
-        "HabitProgress", back_populates="habit", cascade="all, delete-orphan"
+        "HabitProgress",
+        back_populates="habit",
+        cascade="all, delete-orphan",  # Ensures related HabitProgress records are deleted
     )
 
 

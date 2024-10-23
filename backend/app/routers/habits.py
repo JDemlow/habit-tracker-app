@@ -46,7 +46,20 @@ def update_habit(
 
 # Delete a habit
 @router.delete("/habits/{habit_id}", response_model=schemas.Habit)
-def delete_habit(habit_id: int, db: Session = Depends(get_db)):
+def delete_habit_route(habit_id: int, db: Session = Depends(get_db)):
+    """
+    Delete a habit by its ID.
+
+    Args:
+        habit_id (int): The ID of the habit to delete.
+        db (Session): The database session.
+
+    Returns:
+        Habit: The deleted habit object.
+
+    Raises:
+        HTTPException: If the habit with the given ID does not exist.
+    """
     db_habit = crud.delete_habit(db, habit_id)
     if db_habit is None:
         raise HTTPException(status_code=404, detail="Habit not found")

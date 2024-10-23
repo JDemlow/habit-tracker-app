@@ -1,12 +1,9 @@
-// src/types/index.ts
+// src/types.ts
 
 export interface Habit {
-  id: string;
+  id: string; // Using string UUIDs
   name: string;
   goalMinutes: number;
   todayMinutes: number;
-  history: {
-    date: string; // ISO date string
-    minutes: number;
-  }[];
+  history: { date: string; minutes: number }[];
 }

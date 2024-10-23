@@ -12,7 +12,7 @@ const HabitList: React.FC = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {habits.map((habit) => (
         <HabitItem key={habit.id} habit={habit} />
       ))}

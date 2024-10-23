@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-grow container mx-auto px-4 py-6">
+        <main className="container flex-grow px-4 py-6 mx-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/add" element={<AddHabit />} />

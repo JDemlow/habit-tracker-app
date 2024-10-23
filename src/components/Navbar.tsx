@@ -7,9 +7,9 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-blue-600 text-white p-4">
-      <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <Link to="/" className="font-bold text-xl">
+    <nav className="p-4 text-white bg-blue-600">
+      <div className="container flex flex-wrap items-center justify-between mx-auto">
+        <Link to="/" className="text-xl font-bold">
           Habit Tracker
         </Link>
         <button

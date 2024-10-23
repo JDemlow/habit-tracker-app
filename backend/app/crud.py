@@ -28,11 +28,29 @@ def create_habit(db: Session, habit: schemas.HabitCreate):
 
 
 def delete_habit(db: Session, habit_id: int):
-    db_habit = get_habit(db, habit_id)
+    """
+    Delete a habit by its ID.
+
+    Args:
+        db (Session): The database session.
+        habit_id (int): The ID of the habit to delete.
+
+    Returns:
+        Habit | None: The deleted habit object if found, else None.
+    """
+    # Retrieve the habit by ID
+    db_habit = db.query(models.Habit).filter(models.Habit.id == habit_id).first()
+
     if db_habit:
+        # Delete the habit
         db.delete(db_habit)
         db.commit()
-    return db_habit
+        # Optionally, refresh to get the latest state
+        db.refresh(db_habit)
+        return db_habit
+    else:
+        # Habit not found
+        return None
 
 
 def update_habit(db: Session, habit_id: int, habit: schemas.HabitCreate):
