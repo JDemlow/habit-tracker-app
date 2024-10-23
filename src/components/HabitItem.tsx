@@ -19,13 +19,15 @@ const HabitItem: React.FC<HabitItemProps> = ({ habit }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded p-4">
-      <Link to={`/habit/${habit.id}`}>
-        <h2 className="text-xl font-semibold mb-2">{habit.name}</h2>
-      </Link>
-      <p className="mb-2">Goal: {habit.goalMinutes} minutes/day</p>
-      <ProgressBar current={habit.todayMinutes} goal={habit.goalMinutes} />
-      <div className="mt-4">
+    <div className="bg-white shadow-md rounded p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+      <div>
+        <Link to={`/habit/${habit.id}`}>
+          <h2 className="text-xl font-semibold mb-2">{habit.name}</h2>
+        </Link>
+        <p className="mb-2">Goal: {habit.goalMinutes} minutes/day</p>
+        <ProgressBar current={habit.todayMinutes} goal={habit.goalMinutes} />
+      </div>
+      <div className="mt-4 sm:mt-0">
         <Button onClick={handleIncrement}>+5 Minutes</Button>
       </div>
     </div>

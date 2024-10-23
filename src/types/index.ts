@@ -5,5 +5,8 @@ export interface Habit {
   name: string;
   goalMinutes: number;
   todayMinutes: number;
-  // You can expand this with weekly, monthly data as needed
+  history: {
+    date: string; // ISO date string
+    minutes: number;
+  }[];
 }

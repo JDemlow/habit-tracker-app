@@ -28,7 +28,7 @@ interface HabitChartProps {
 }
 
 const HabitChart: React.FC<HabitChartProps> = ({ habitId }) => {
-  const { habits } = useHabits();
+  const { habits, getHabitHistory } = useHabits();
 
   const habit = habits.find((h) => h.id === habitId);
 
@@ -36,17 +36,22 @@ const HabitChart: React.FC<HabitChartProps> = ({ habitId }) => {
     return <p>Habit not found.</p>;
   }
 
-  // For demonstration, we'll simulate past 7 days data
-  const labels = Array.from({ length: 7 }, (_, i) =>
-    format(subDays(new Date(), 6 - i), "MM/dd")
-  );
+  // Get the last 7 days
+  const today = new Date();
+  const last7Days = Array.from({ length: 7 }, (_, i) => {
+    const day = subDays(today, 6 - i);
+    return format(day, "yyyy-MM-dd");
+  });
 
-  const dataPoints = labels.map(() =>
-    Math.floor(Math.random() * habit.goalMinutes)
-  );
+  const history = getHabitHistory(habit.id);
+
+  const dataPoints = last7Days.map((date) => {
+    const entry = history.find((e) => e.date === date);
+    return entry ? entry.minutes : 0;
+  });
 
   const data = {
-    labels,
+    labels: last7Days.map((date) => format(new Date(date), "MM/dd")),
     datasets: [
       {
         label: "Minutes Spent",
@@ -67,15 +72,24 @@ const HabitChart: React.FC<HabitChartProps> = ({ habitId }) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, // Allows the chart to adjust its height
     plugins: {
       legend: {
         position: "top" as const,
       },
     },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 10,
+        },
+      },
+    },
   };
 
   return (
-    <div className="mt-6 bg-white p-4 rounded shadow-md">
+    <div className="mt-6 bg-white p-4 rounded shadow-md h-64 sm:h-80">
       <h2 className="text-xl font-semibold mb-4">
         Progress Over the Last 7 Days
       </h2>
